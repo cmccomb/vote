@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.3.0 - 2026-09-19
+
+- Add Copeland(0.5) with integer scores scaled by two and explicit tied groups.
+- Expose pairwise comparison counts and strict Condorcet winner detection,
+  including reusable matrix methods to avoid recounting ballots.
+- Add instant-runoff voting with per-round tallies, single-candidate
+  eliminations, and explicit unresolved elimination ties. A caller-supplied
+  comparator can resolve ties without changing candidates' unequal vote counts.
+- Preserve the existing 0.2 API and its complete, strict ballot requirements.
+- Add a methods-comparison example, README guidance, a published counting
+  fixture, and exhaustive pairwise/runoff checks over 1,554 small profiles.
+
 ## 0.2.0 - 2026-09-19
 
 - Validate profiles at construction with `Preference::new` and `TryFrom`,

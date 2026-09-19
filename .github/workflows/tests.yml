@@ -29,6 +29,7 @@ jobs:
         run: |
           cargo +stable run --example simple
           cargo +stable run --example seeded
+          cargo +stable run --example compare_methods
 
   quality:
     runs-on: ubuntu-latest

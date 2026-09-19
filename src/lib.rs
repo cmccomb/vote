@@ -2,11 +2,15 @@
 #![warn(missing_docs)]
 #![forbid(unsafe_code)]
 
+mod pairwise;
 mod preference;
 mod results;
+mod runoff;
 
+pub use pairwise::{condorcet_winner, copeland, pairwise, PairwiseResults};
 pub use preference::{Preference, PreferenceError};
 pub use results::{Results, ScoreGroup};
+pub use runoff::{instant_runoff, instant_runoff_by, RunoffOutcome, RunoffResults, RunoffRound};
 
 use rand::{Rng, RngExt};
 use std::collections::HashMap;
