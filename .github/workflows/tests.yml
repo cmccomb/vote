@@ -1,0 +1,57 @@
+name: tests
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install stable Rust
+        run: rustup toolchain install stable --profile minimal
+      - name: Test library, integration tests, and README examples
+        run: cargo +stable test --all-features
+      - name: Run examples
+        run: |
+          cargo +stable run --example simple
+          cargo +stable run --example seeded
+
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install tools
+        run: rustup toolchain install stable --profile minimal --component rustfmt --component clippy
+      - name: Check formatting
+        run: cargo +stable fmt --all -- --check
+      - name: Run Clippy
+        run: cargo +stable clippy --all-targets --all-features -- -D warnings
+      - name: Build documentation
+        env:
+          RUSTDOCFLAGS: -D warnings
+        run: cargo +stable doc --no-deps --all-features
+      - name: Verify packaged crate
+        run: cargo +stable package
+
+  msrv:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install Rust 1.85
+        run: rustup toolchain install 1.85.0 --profile minimal
+      - name: Test minimum supported Rust version
+        run: cargo +1.85.0 test --all-features
