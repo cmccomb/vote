@@ -1,9 +1,10 @@
 [package]
 name = "vote"
-version = "0.1.3"
+version = "0.2.0"
 authors = ["Chris McComb <ccmcc2012@gmail.com>"]
 description = "Common voting methods"
-edition = "2018"
+edition = "2021"
+rust-version = "1.85"
 readme = "README.md"
 repository = "https://github.com/cmccomb/vote"
 homepage = "https://github.com/cmccomb/vote"
@@ -13,4 +14,4 @@ keywords = ["voting", "preference", "aggregation"]
 categories = ["algorithms", "mathematics", "science"]
 
 [dependencies]
-rand="0.7.3"
+rand = { version = "0.10.2", features = ["unbiased"] }
