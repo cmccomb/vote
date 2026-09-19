@@ -1,6 +1,6 @@
 [package]
 name = "vote"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["Chris McComb <ccmcc2012@gmail.com>"]
 description = "Common voting methods"
 edition = "2021"

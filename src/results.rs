@@ -9,9 +9,11 @@ pub struct ScoreGroup<T> {
     pub candidates: Vec<T>,
 }
 
-/// Positional voting results, grouped by score from highest to lowest.
+/// Voting scores, grouped from highest to lowest.
 ///
-/// Every candidate occurs exactly once, including candidates with zero points.
+/// Every candidate in the count occurs exactly once, including those with zero
+/// points. The scoring unit is defined by the method: positional points,
+/// doubled Copeland points, or a runoff round's vote counts.
 /// Equal scores remain tied. Use [`Self::ranking_by`] only when a downstream
 /// application requires a ranking with a caller-chosen tie-break rule.
 #[derive(Debug, Clone, PartialEq, Eq)]
